@@ -16,16 +16,14 @@ Implementation
 Implement wall following to autonomously navigate the Levine Hall map, following inner walls (left if going counter-clockwise). Use either C++ or Python for implementation.
 Running the Code
 
-    Python Version:
+- **Python Version:**
+  ```
+  ros2 run wall_follow wall_follow.py
+  ```
 
-    arduino
-
-ros2 run wall_follow wall_follow.py
-
-C++ Version:
-
-arduino
-
-    ros2 run wall_follow wall_follow
+- **C++ Version:**
+  ```
+  ros2 run wall_follow_node wall_follow_node
+  ```
 
 Ensure smooth execution in the simulation environment provided.
