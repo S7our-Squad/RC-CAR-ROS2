@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
 
@@ -5,19 +6,25 @@ import numpy as np
 from sensor_msgs.msg import LaserScan
 from ackermann_msgs.msg import AckermannDriveStamped
 
+
 class WallFollow(Node):
-    """ 
+    """
     Implement Wall Following on the car
     """
-    def __init__(self):
-        super().__init__('wall_follow_node')
 
-        lidarscan_topic = '/scan'
-        drive_topic = '/drive'
+    def __init__(self):
+        super().__init__("wall_follow_node")
+
+        lidarscan_topic = "/scan"
+        drive_topic = "/drive"
 
         # Create subscribers and publishers
-        self.lidar_subscriber = self.create_subscription(LaserScan, lidarscan_topic, self.scan_callback, 10)
-        self.drive_publisher = self.create_publisher(AckermannDriveStamped, drive_topic, 10)
+        self.lidar_subscriber = self.create_subscription(
+            LaserScan, lidarscan_topic, self.scan_callback, 10
+        )
+        self.drive_publisher = self.create_publisher(
+            AckermannDriveStamped, drive_topic, 10
+        )
 
         # Set PID gains
         self.kp = 1.0
@@ -41,8 +48,13 @@ class WallFollow(Node):
         """
         # Calculate the index in the range array for the given angle
         index = int((angle - angle_min) / angle_increment)
-        if index < 0 or index >= len(range_data) or np.isnan(range_data[index]) or np.isinf(range_data[index]):
-            return float('inf')
+        if (
+            index < 0
+            or index >= len(range_data)
+            or np.isnan(range_data[index])
+            or np.isinf(range_data[index])
+        ):
+            return float("inf")
         return range_data[index]
 
     def get_error(self, range_data, dist, angle_min, angle_increment):
@@ -75,6 +87,7 @@ class WallFollow(Node):
         Returns:
             None
         """
+        # angle = 0.0
         self.integral += error
         derivative = error - self.prev_error
         angle = self.kp * error + self.ki * self.integral + self.kd * derivative
@@ -98,7 +111,12 @@ class WallFollow(Node):
         desired_distance = 1.0  # Desired distance to the wall in meters
         velocity = 1.0  # Desired velocity of the car
 
-        error = self.get_error(scan_msg.ranges, desired_distance, scan_msg.angle_min, scan_msg.angle_increment)
+        error = self.get_error(
+            scan_msg.ranges,
+            desired_distance,
+            scan_msg.angle_min,
+            scan_msg.angle_increment,
+        )
         self.pid_control(error, velocity)
 
 
@@ -113,5 +131,5 @@ def main(args=None):
     rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

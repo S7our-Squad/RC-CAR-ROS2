@@ -3,7 +3,7 @@
 <package format="3">
   <name>wall_follow</name>
   <version>0.0.0</version>
-  <description>A PID controller adjusts a system to maintain parameters around a desired set point</description>
+  <description>The Wall Following package sollution based on PID</description>
   <maintainer email="mustapha.ghiati@uit.ac.ma">GHIATI mustapha</maintainer>
   <license>MIT</license>
 

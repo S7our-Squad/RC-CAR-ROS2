@@ -15,7 +15,7 @@ setup(
     zip_safe=True,
     maintainer='GHIATI Mustapha',
     maintainer_email='mustapha.ghiati@uit.ac.ma',
-    description='f1tenth wall_follow lab',
+    description='The Wall Following package sollution based on PID',
     license='MIT',
     tests_require=['pytest'],
     entry_points={
