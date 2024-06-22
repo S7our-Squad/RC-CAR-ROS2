@@ -13,9 +13,9 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='GHIATI Mustapha',
-    maintainer_email='mustapha.ghiati@ui.ac.ma',
-    description='Automatic Emergency Braking ',
+    maintainer='OKHADIR Hamza',
+    maintainer_email='hamza.okhadir2018@gmail.com',
+    description='My solution for the Automatic Emergency Braking System based on TTC calculation',
     license='MIT',
     tests_require=['pytest'],
     entry_points={

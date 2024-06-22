@@ -3,9 +3,8 @@
 <package format="3">
   <name>safety_node</name>
   <version>0.0.0</version>
-  <description>The Safety Node implements Automatic Emergency Braking (AEB) through Time to Collision (TTC) calculations</description>
-  <maintainer email="mustapha.ghiati@gmail.com">Mustapha Ghiati</maintainer>
-  
+  <description>My solution for the Automatic Emergency Braking System based on TTC calculation</description>
+  <maintainer email="hamza.okhadir2018@gmail.com">OKHADIR Hamza</maintainer>
   <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
