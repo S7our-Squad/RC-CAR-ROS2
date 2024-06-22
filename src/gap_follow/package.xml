@@ -3,11 +3,24 @@
 <package format="3">
   <name>gap_follow</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="mustapha.ghiati@gmail.com">mg</maintainer>
-  <license>TODO: License declaration</license>
+  <description>My solution for Lab 4: Follow the Gap for University of Pennsylvania course F1TENTH</description>
+  <maintainer email="hamza.okhadir2018@gmail.com">OKHADIR Hamza</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>ackermann_msgs</depend>
+  <depend>geometry_msgs</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
 
   <export>
-    <build_type>cmake</build_type>
+    <build_type>ament_cmake</build_type>
   </export>
 </package>
