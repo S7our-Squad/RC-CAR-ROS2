@@ -1,29 +1,63 @@
-PID in the Time Domain
+# Wall Following
 
-A PID controller adjusts a system to maintain parameters around a desired set point using:
-u(t)=Kpe(t)+Ki∫e(t)dt+Kdde(t)dtu(t)=Kp​e(t)+Ki​∫e(t)dt+Kd​dtde(t)​
-Wall Following
+## I. Learning Goals
 
-In this lab, the car autonomously follows walls by:
+- PID Controllers
+- Driving the car autonomously via Wall Following
 
-    Using laser scans aa and bb to determine distances.
-    Calculating the angle θθ to the wall and projecting the car's future position.
-    Applying a PID algorithm to compute a steering angle.
-    Adjusting speed based on the steering angle for safe driving.
+## II. Review of PID in the time domain
 
-Implementation
+A PID controller is a way to maintain certain parameters of a system around a specified set point. PID controllers are used in a variety of applications requiring closed-loop control, such as in the VESC speed controller on your car.
 
-Implement wall following to autonomously navigate the Levine Hall map, following inner walls (left if going counter-clockwise). Use either C++ or Python for implementation.
-Running the Code
+The general equation for a PID controller in the time domain, as discussed in lecture, is as follows:
 
-- **Python Version:**
-  ```
-  ros2 run wall_follow wall_follow.py
-  ```
+$$ u(t)=K_{p}e(t)+K_{i}\int_{0}^{t}e(t^{\prime})dt^{\prime}+K_{d}\frac{d}{dt}(e(t)) $$
 
-- **C++ Version:**
-  ```
-  ros2 run wall_follow_node wall_follow_node
-  ```
+Here, $K_p$, $K_i$, and $K_d$ are constants that determine how much weight each of the three components (proportional, integral, derivative) contribute to the control output $u(t)$. $u(t)$ in our case is the steering angle we want the car to drive at. The error term $e(t)$ is the difference between the set point and the parameter we want to maintain around that set point.
 
-Ensure smooth execution in the simulation environment provided.
+## III. Wall Following
+
+In the context of our car, the desired distance to the wall should be our set point for our controller, which means our error is the difference between the desired and actual distance to the wall.
+
+This raises an important question: how do we measure the distance to the wall, and at what point in time? One option would simply be to consider the distance to the right wall at the current time $t$ (let's call it $D_t$).
+
+Let's consider a generic orientation of the car with respect to the right wall and suppose the angle between the car's x-axis and the axis in the direction along the wall is denoted by $\alpha$.
+
+We will obtain two laser scans (distances) to the wall: one 90 degrees to the right of the car's x-axis (beam b in the figure), and one (beam a) at an angle $\theta$ ( $0<\theta\leq70$ degrees) to the first beam. Suppose these two laser scans return distances a and b, respectively.
+
+![fig1](/img/wall_following_lab_figure_1.png)
+
+*Figure 1: Distance and orientation of the car relative to the wall*
+
+Using the two distances $a$ and $b$ from the laser scan, the angle $\theta$ between the laser scans, and some trigonometry, we can express $\alpha$ as
+
+$$ \alpha=\mbox{tan}^{-1}\left(\frac{a\mbox{cos}(\theta)-b}{a\mbox{sin}(\theta)}\right) $$
+
+We can then express $D_t$ as
+
+$$ D_t=b\mbox{cos}(\alpha) $$
+
+to get the current distance between the car and the right wall. What's our error term $e(t)$, then? It's simply the difference between the desired distance and actual distance! For example, if our desired distance is 1 meter from the wall, then $e(t)$ becomes $1-D_t$.
+
+However, we have a problem on our hands. Remember that this is a race: your car will be traveling at a high speed and therefore will have a non-instantaneous response to whatever speed and servo control you give to it. If we simply use the current distance to the wall, we might end up turning too late, and the car may crash. Therefore, we must look to the future and project the car ahead by a certain lookahead distance (let's call it $L$). Our new distance $D_{t+1}$ will then be
+
+$$D_{t+1}=D_t+L\mbox{sin}(\alpha)$$
+
+![fig1](/img/wall_following_lab_figure_2.png)
+
+*Figure 2: Finding the future distance from the car to the wall*
+
+We're almost there. Our control algorithm gives us a steering angle for the VESC, but we would also like to slow the car down around corners for safety. We can compute the speed in a step-like fashion based on the steering angle, or equivalently the calculated error, so that as the angle exceeds progressively larger amounts, the speed is cut in discrete increments. A good starting point for the speed control algorithm is:
+
+- If the steering angle is between 0 degrees and 10 degrees, the car should drive at 1.5 meters per second.
+- If the steering angle is between 10 degrees and 20 degrees, the speed should be 1.0 meters per second.
+- Otherwise, the speed should be 0.5 meters per second.
+
+### IV. Summary of steps
+
+1. Obtain two laser scans (distances) a and b.
+2. Use the distances a and b to calculate the angle $\alpha$ between the car's $x$-axis and the right wall.
+3. Use $\alpha$ to find the current distance $D_t$ to the car, and then $\alpha$ and $D_t$ to find the estimated future distance $D_{t+1}$ to the wall.
+4. Run $D_{t+1}$ through the PID algorithm described above to get a steering angle.
+5. Use the steering angle you computed in the previous step to compute a safe driving speed.
+6. Publish the steering angle and driving speed to the `/drive` topic in simulation.
