@@ -15,7 +15,7 @@ setup(
     zip_safe=True,
     maintainer='OKHADIR Hamza',
     maintainer_email='hamza.okhadir2018@gmail.com',
-    description='My solution for Lab 4: Follow the Gap for University of Pennsylvania course F1TENTH',
+    description='The solution for Follow the Gap package',
     license='MIT',
     tests_require=['pytest'],
     entry_points={

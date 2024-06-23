@@ -3,7 +3,7 @@
 <package format="3">
   <name>gap_follow</name>
   <version>0.0.0</version>
-  <description>My solution for Lab 4: Follow the Gap for University of Pennsylvania course F1TENTH</description>
+  <description>The solution for Follow the Gap package</description>
   <maintainer email="hamza.okhadir2018@gmail.com">OKHADIR Hamza</maintainer>
   <license>MIT</license>
 

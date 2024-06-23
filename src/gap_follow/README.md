@@ -23,7 +23,7 @@ However, the steps are outlined over here:
 
 Implement a gap follow algorithm to make the car drive autonomously around the Levine Hall map. We can implement this node in either C++ or Python. There are two extra test maps `levine_blocked.png`:![blocked](./levine_blocked.png), which is empty, and `levine_obs.png`:![obstacle](./levine_obs.png), which has obstacles that are relatively hard to navigate through for us to evaluate our code on.
 
-To change the map in the simulation, add the included `.png` and `.yaml` map files to `f1tenth_gym_ros/maps` directory. Then, change `f1tenth_gym_ros/config/sim.yaml` to use your desired map.
+To change the map in the simulation, add the included `.png` and `.yaml` map files to `simulator/maps` directory. Then, change `simulator/config/sim.yaml` to use your desired map.
 
 ### V. Extra Resources
 
