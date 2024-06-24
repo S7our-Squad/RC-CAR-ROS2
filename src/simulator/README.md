@@ -31,7 +31,7 @@ This is a containerized ROS2 package that turns into a simulation for our RC Car
 3. In a separate terminal, run the following, and you'll have the a bash session in the simulation container. [`tmux`](https://hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/) is available for convenience.
 
 ```bash
-docker exec -it simulator-sim-1 /bin/bash
+docker exec -it rc-car-ros2-sim-1 /bin/bash
 ```
 
 4. In your browser, navigate to [http://localhost:8080/vnc.html](http://localhost:8080/vnc.html), you should see the noVNC logo with the connect button. Click the connect button to connect to the session.

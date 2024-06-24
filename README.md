@@ -31,7 +31,7 @@ A ROS2 project for autonomous car racing RC CAR. Code can run both in the physic
 3. In a separate terminal, run the following, and you'll have the a bash session in the simulation container. [`tmux`](https://hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/) is available for convenience.
 
 ```bash
-docker exec -it simulator-sim-1 /bin/bash
+docker exec -it rc-car-ros2-sim-1 /bin/bash
 ```
 
 4. In your browser, navigate to [http://localhost:8080/vnc.html](http://localhost:8080/vnc.html), you should see the noVNC logo with the connect button. Click the connect button to connect to the session.
