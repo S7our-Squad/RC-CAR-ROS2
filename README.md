@@ -13,7 +13,7 @@ A ROS2 project for autonomous car racing RC CAR. Code can run both in the physic
 - **Docker** Follow the instructions [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/) to install Docker. A short tutorial can be found [here](https://docs.docker.com/get-started/) if you're not familiar with Docker. If you followed the post-installation steps you won't have to prepend your docker and docker-compose commands with sudo.
 - Additionally you'll need **docker-compose**. Follow the instruction [here](https://docs.docker.com/compose/install/) to install docker-compose.
 
-## Installing the simulation
+## Getting Started
 
 1. Clone this repo
 
