@@ -2,6 +2,12 @@
 
 A ROS2 project for autonomous car racing RC CAR. Code can run both in the physical car, as well as in simulation.
 
+# Demo
+
+Below is a demo of the car in the Simulation env:
+
+[![Watch the video](https://img.youtube.com/vi/2zpEKH0zm0g/maxresdefault.jpg)](https://youtu.be/2zpEKH0zm0g)
+
 # Installation
 
 **Supported System:**
