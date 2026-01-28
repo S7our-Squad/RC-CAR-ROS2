@@ -1,0 +1,49 @@
+# SLAM Toolbox Configuration for YDLIDAR X2
+
+slam_toolbox:
+  ros__parameters:
+    use_sim_time: false
+    
+    # Plugin stack
+    solver_plugin: solver_plugins::CeresSolver
+    ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
+    ceres_linear_solver_threads: 1
+    ceres_trust_strategy: LEVENBERG_MARQUARDT
+    ceres_dogleg_type: TRADITIONAL_DOGLEG
+    ceres_loss_function: None
+    
+    # ROS Parameters
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_link
+    scan_topic: /scan
+    use_map_saver: true
+    map_start_at_origin: true
+    
+    # If you have odometry (e.g., wheel encoders)
+    # Set to true and provide /odom topic
+    use_odometry: false
+    
+    # Scan processing
+    max_beams_to_process: 500
+    loop_search_max_chain_size: 5
+    loop_match_minimum_chain_size: 10
+    do_loop_closing: true
+    async_corrector_pose_set_topic: /map
+    
+    # Constraints
+    correlation_covariance_scale: 1.0
+    loop_closure_transform_threshold: 1.25
+    loop_closure_outlier_ratio: 0.08
+    loop_closure_outlier_threshold: 2.0
+    loop_closure_minimum_chain_size: 10
+    
+    # Minimum scan difference
+    minimum_scan_hits: 3
+    minimum_travel_heading: 0.5
+    minimum_travel_distance: 0.5
+    map_update_angle: 0.002
+    
+    # Filter doublets
+    remove_unknown_speckles: true
+    replenish_frequency: 20.0

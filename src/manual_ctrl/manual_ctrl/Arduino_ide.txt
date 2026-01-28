@@ -1,0 +1,51 @@
+#include <Servo.h>
+
+Servo esc;
+Servo steering;
+
+const int ESC_PIN = 9;
+const int STEERING_PIN = 10;
+
+float speed = 0.0;
+float steering_angle = 0.0;
+
+void setup() {
+  Serial.begin(115200);
+
+  esc.attach(ESC_PIN);
+  steering.attach(STEERING_PIN);
+
+  // Neutral
+  esc.writeMicroseconds(1000);
+  steering.writeMicroseconds(1500);
+
+  Serial.println("Arduino ready");
+}
+
+void loop() {
+  if (Serial.available()) {
+    String data = Serial.readStringUntil('\n');
+
+    int commaIndex = data.indexOf(',');
+    if (commaIndex > 0) {
+      speed = data.substring(0, commaIndex).toFloat();
+      steering_angle = data.substring(commaIndex + 1).toFloat();
+
+      // Map speed (-1 to 1) → ESC PWM
+      int esc_pwm = map(speed * 1000, -1000, 1000, 1000, 2000);
+      esc_pwm = constrain(esc_pwm, 1000, 2000);
+
+      // Map steering (rad) → servo PWM
+      int steer_pwm = map(steering_angle * 1000, -520, 520, 1100, 1900);
+      steer_pwm = constrain(steer_pwm, 1100, 1900);
+
+      esc.writeMicroseconds(esc_pwm);
+      steering.writeMicroseconds(steer_pwm);
+
+      Serial.print("ESC: ");
+      Serial.print(esc_pwm);
+      Serial.print(" | STEER: ");
+      Serial.println(steer_pwm);
+    }
+  }
+}

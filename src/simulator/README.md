@@ -70,3 +70,31 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
 Then, press `i` to move forward, `u` and `o` to move forward and turn, `,` to move backwards, `m` and `.` to move backwards and turn, and `k` to stop in the terminal window running the teleop node.
+
+
+# updated gym bridge 
+
+```bash
+# Install ROS2 dependencies
+sudo apt update
+sudo apt install -y \
+    ros-humble-rclpy \
+    ros-humble-sensor-msgs \
+    ros-humble-nav-msgs \
+    ros-humble-geometry-msgs \
+    ros-humble-ackermann-msgs \
+    ros-humble-tf2-ros \
+    ros-humble-robot-state-publisher \
+    ros-humble-joint-state-publisher \
+    ros-humble-xacro \
+    ros-humble-rviz2
+
+# Navigate to your package directory
+cd /path/to/your/workspace/src/simulator
+
+# Install Python requirements
+pip install -r requirements.txt
+
+# Or install with pip3
+pip3 install -r requirements.txt
+```

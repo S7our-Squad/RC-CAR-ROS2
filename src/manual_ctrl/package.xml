@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>manual_ctrl</name>
+  <version>0.0.1</version>
+  <description>manual control ROS 2 nodes for RC Car (joystick and motor control).</description>
+
+  <maintainer email="devadanitish@gmail.com">Nitish</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>ackermann_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>ydlidar_ros2_driver</depend>
+
+  <exec_depend>gpiozero</exec_depend>
+  <exec_depend>numpy</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

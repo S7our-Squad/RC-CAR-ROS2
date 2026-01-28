@@ -1,0 +1,5 @@
+numpy
+sounddevice
+faster-whisper
+scipy
+torch

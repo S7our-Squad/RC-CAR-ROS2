@@ -1,0 +1,15 @@
+# Python Requirements for F1TENTH Gym Bridge
+# Install with: pip install -r requirements.txt
+
+# Core dependencies
+numpy>=1.21.0
+scipy>=1.9.0
+pillow>=9.0.0
+pyyaml>=6.0
+
+# Performance optimization (optional but recommended)
+numba>=0.56.0
+
+# Note: ROS2 packages should be installed via apt:
+# sudo apt install ros-humble-rclpy ros-humble-sensor-msgs ros-humble-nav-msgs 
+# sudo apt install ros-humble-geometry-msgs ros-humble-ackermann-msgs ros-humble-tf2-ros
